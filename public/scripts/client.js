@@ -5,12 +5,13 @@
  */
 
 const createTweetElement = (tweetData) => {
-  //assemble tweet
+  //parse tweet data
   const avatar = tweetData.user.avatars;
   const username = tweetData.user.name;
   const handle = tweetData.user.handle;
   const timeSince = getTimeSince(tweetData.created_at);
 
+  //assemble the html for a tweet
   const $header = $(
     `<header>
       <img src=${avatar}>
@@ -28,7 +29,7 @@ const createTweetElement = (tweetData) => {
       </div>
     </footer>`
   );
-  const $content = $('<p>').text(tweetData.content.text);
+  const $content = $('<p>').text(tweetData.content.text);   //escape user input
   const $tweet = $(`<article class="tweet"></article>`)
                   .append($header, $content, $footer);
   return $tweet;
@@ -36,7 +37,8 @@ const createTweetElement = (tweetData) => {
 
 const renderTweets = (tweets) => {
   const $tweetContainer = $('#tweets-container')
-  $tweetContainer.empty();
+  $tweetContainer.empty(); //empty container before rendering
+
   for (const tweet of tweets) {
     const $tweet = createTweetElement(tweet);
     $tweetContainer.append($tweet); 

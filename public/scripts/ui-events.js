@@ -1,3 +1,7 @@
+/**
+ * Attach event handlers for UI events
+ */
+
 $(document).ready(function () {
   // Show "jump to top" button when user scrolls far down enough
   $(window).on("scroll", function() {
@@ -10,12 +14,13 @@ $(document).ready(function () {
     showComposeTweetBox();
   });
 
+  // Updates the counter when the compose tweet box has input
   $('#new-tweet textarea').on('input', function() {
     const inputLength = $(this).val().length
     updateCounter(inputLength);
   });
 
-  // scroll to top when "jump to top" button is clicked
+  // Scroll to top when "jump to top" button is clicked
   $('#jump-btn').on("click", function() {
     showComposeTweetBox(true);
     $(window).scrollTop(0);
