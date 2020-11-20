@@ -6,7 +6,7 @@
  * Slide down the element if show is true otherwise slide up
  * @param {Boolean} show 
  * @param {} $element 
- * @param {() => {}} done 
+ * @param {() => void} done 
  */
 const showElement = (show, $element, done) => {
   show ? $element.slideDown(300, done) : $element.slideUp(300, done);
@@ -35,13 +35,13 @@ const showComposeTweetBox = (show) => {
   const toggle = show || !$form.is(":visible");
   showErrMsg(false);
   showElement(toggle, $form, () => {
-    $form.find('textarea').focus();
+    $("#new-tweet textarea").focus();
   });
 };
 
 /**
- * Reveal "jump to top" button when show is true, at the same time, hide 
- * the "new tweet" button. Vice versa when show is false;
+ * Reveal "jump to top" button when show is true, at the same time, 
+ * hide the "new tweet" button. Vice versa when show is false;
  * @param {Boolean} show 
  */
 const showJumpButton = (show) => {
@@ -52,11 +52,11 @@ const showJumpButton = (show) => {
     $newTweetBtn.fadeOut(100, () => {
       $jumpBtn.fadeIn(100);
     });
-  } else {
-    $jumpBtn.fadeOut(100, () => {
-      $newTweetBtn.fadeIn(100);
-    });
+    return;
   }
+  $jumpBtn.fadeOut(100, () => {
+    $newTweetBtn.fadeIn(100);
+  });
 }
 
 /**
@@ -69,9 +69,11 @@ const updateCounter = (inputLength) => {
   const charsLeft = MAX_LENGTH - inputLength;
   const $counter = $("#new-tweet .counter");
   $counter.val(charsLeft);
-  charsLeft < 0 ? 
-    $counter.addClass('over-word-limit') :
-    $counter.removeClass('over-word-limit');
+
+  if (charsLeft < 0) {
+    return $counter.addClass('over-word-limit');
+  }
+  $counter.removeClass('over-word-limit');
 }
 
 

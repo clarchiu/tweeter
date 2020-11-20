@@ -4,6 +4,10 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+/**
+ * Returns the jQuery element for the tweet data
+ * @param {*} tweetData tweet object from server
+ */
 const createTweetElement = (tweetData) => {
   //parse tweet data
   const avatar = tweetData.user.avatars;
@@ -29,12 +33,18 @@ const createTweetElement = (tweetData) => {
       </div>
     </footer>`
   );
-  const $content = $('<p>').text(tweetData.content.text);   //escape user input
+  //escape user input
+  const $content = $('<p>').text(tweetData.content.text);   
   const $tweet = $(`<article class="tweet"></article>`)
-                  .append($header, $content, $footer);
-  return $tweet;
+  return $tweet.append($header, $content, $footer);
+  ;
 }
 
+/**
+ * For each tweet object in tweets, call createTweetElement and render 
+ * it in the #tweet-container element
+ * @param {[]} tweets array of tweet objects
+ */
 const renderTweets = (tweets) => {
   const $tweetContainer = $('#tweets-container')
   $tweetContainer.empty(); //empty container before rendering
@@ -45,8 +55,13 @@ const renderTweets = (tweets) => {
   }
 }
 
-const loadTweets = () => {
-  $.ajax('/tweets', { method: 'GET' })
+/**
+ * Makes an AJAX GET request to PATH to retrieve tweet objects array.
+ * If successful then call renderTweets,
+ * Otherwsie display error message
+ */
+const loadTweets = (path) => {
+  $.ajax(path, { method: 'GET' })
     .then(function(tweets) {
       renderTweets(tweets);
     })
@@ -55,34 +70,56 @@ const loadTweets = () => {
     });
 }
 
-const submitTweet = (path, formData) => {
-  const text = $(formData).find('textarea').val();
-  const errMsg = !text ? "TOO SHORT!" : 
-                 (text.length > 140 ? "TOO LONG!" : "");
-  if (errMsg) {
-    return Promise.reject(errMsg);
+/**
+ * Validates tweet content. If not valid, returns appropriate error message,
+ * if tweet is valud, returns empty string
+ * @param {string} tweetContent 
+ */
+const validateTweet = (tweetContent) => {
+  if (!tweetContent) {
+    return "TOO SHORT!";
   }
-  return $.ajax(path, { method: 'POST', data: $(formData).serialize() });
+  if (tweetContent.length > 140) {
+    return "TOO LONG!";
+  }
+  return "";
+}
+
+/**
+ * Makes an AJAX POST request to path, request body is $form input.
+ * Calls loadTweets on success, otherwise display error message
+ * @param {string} path 
+ * @param {*} $form compose tweet form
+ */
+const submitTweet = (path, $form) => {
+  $.ajax(path, { method: 'POST', data: $form.serialize() })
+    .then(function () {
+      $('#new-tweet textarea').val('').trigger('input');
+      loadTweets(path);
+    })
+    .catch(function(err) {
+      showErrMsg(true, "Could not complete request");
+    });
 }
 
 $(document).ready(function () {
+  const PATH = "/tweets";
   // load and render tweets from initial-tweets.json
-  loadTweets();
+  loadTweets(PATH);
 
   // attach submit event
   $("#new-tweet form").on("submit", function (event) {
     event.preventDefault();
-    showErrMsg(false);
+    showErrMsg(false); // hide error message on submit
 
-    submitTweet('/tweets', this)
-      .then(function () {
-        $("#new-tweet textarea").val('').trigger('input');
-        showErrMsg(false);
-        loadTweets();
-      })
-      .catch(function (err) {
-        showErrMsg(true, "Could not submit tweet: " + err);
-      });
+    const tweetContent = $('#new-tweet textarea').val();
+    const errMsg = validateTweet(tweetContent); // this returns error message if not valid
+
+    if (errMsg) { // if errMsg is non-empty then tweet is not valid
+      showErrMsg(true, errMsg);
+      return;
+    }
+    submitTweet(PATH, $(this))
   });  
 });
 
