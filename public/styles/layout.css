@@ -23,14 +23,15 @@ body {
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
- */
+ */ 
+ 
 main {
- width: 90%;
- margin: auto;
- display: flex;
- flex-direction: column;
- justify-content: center;
- background-color: inherit;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: inherit;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -43,15 +44,15 @@ main {
   }
 
   .header {
-   float: left;
-   margin: 4em 2em 2em 2em;
-   width: 30%;
-   position: fixed;
- }
+    float: left;
+    margin: 4em 2em 2em 2em;
+    width: 30%;
+    position: fixed;
+  }
 
- main {
-   float: right;
-   padding: 2em;
-   width: 60%;
- }
+  main {
+    float: right;
+    padding: 2em;
+    width: 60%;
+  }
 }

@@ -32,7 +32,7 @@ const showErrMsg = (show, err) => {
  */
 const showComposeTweetBox = (show) => {
   const $form = $('#new-tweet form');
-  const toggle = show || !$form.is(":visible");
+  const toggle = show !== undefined ? show : !$form.is(":visible");
   showErrMsg(false);
   showElement(toggle, $form, () => {
     $("#new-tweet textarea").focus();
