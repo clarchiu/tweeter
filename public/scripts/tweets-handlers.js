@@ -3,15 +3,15 @@
  */
 
 /**
- * Validates tweet content. 
+ * Validates tweet content.
  * If not valid, returns a rejected Promise with appropriate error message,
  * if tweet is valid, returns resolved Promise.
- * 
+ *
  * My reason to return a Promise is so I can chain it nicely along
- * with the other async functions. skipping right to a catch if the tweet 
- * is not valid and still pass along an error message that is specific to 
+ * with the other async functions. skipping right to a catch if the tweet
+ * is not valid and still pass along an error message that is specific to
  * the error
- * @param {string} tweetContent 
+ * @param {string} tweetContent
  */
 const validateTweet = (tweetContent) => {
   if (!tweetContent) {
@@ -21,26 +21,26 @@ const validateTweet = (tweetContent) => {
     return Promise.reject("TOO LONG!");
   }
   return Promise.resolve();
-}
+};
 
 /**
  * Makes an AJAX POST request to path, request body is $form input.
  * Returns request as a Promise. lets caller handle
- * @param {string} path 
+ * @param {string} path
  * @param {*} $form compose tweet form
  */
 const submitTweet = (path, $form) => {
   return $.ajax(path, { method: 'POST', data: $form.serialize() });
-}
+};
 
 /**
  * Makes an AJAX GET request to PATH to retrieve tweet objects array.
  * Returns request as a Promise. lets caller handle
- * @param {string} path 
+ * @param {string} path
  */
 const loadTweets = (path) => {
   return $.ajax(path, { method: 'GET' });
-}
+};
 
 /**
  * Returns the jQuery element for the tweet data
@@ -72,23 +72,22 @@ const createTweetElement = (tweetData) => {
     </footer>`
   );
   //escape user input
-  const $content = $('<p>').text(tweetData.content.text);   
-  const $tweet = $(`<article class="tweet"></article>`)
+  const $content = $('<p>').text(tweetData.content.text);
+  const $tweet = $(`<article class="tweet"></article>`);
   return $tweet.append($header, $content, $footer);
-  ;
-}
+};
 
 /**
- * For each tweet object in tweets, call createTweetElement and render 
+ * For each tweet object in tweets, call createTweetElement and render
  * it in the #tweet-container element
  * @param {[]} tweets array of tweet objects
  */
 const renderTweets = (tweets) => {
-  const $tweetContainer = $('#tweets-container')
+  const $tweetContainer = $('#tweets-container');
   $tweetContainer.empty(); //empty container before rendering
 
   for (const tweet of tweets) {
     const $tweet = createTweetElement(tweet);
-    $tweetContainer.append($tweet); 
+    $tweetContainer.append($tweet);
   }
-}
+};

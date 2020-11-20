@@ -3,9 +3,9 @@
  */
 
 /**
- * Returns a string of the amount of time (to the closest unit 
+ * Returns a string of the amount of time (to the closest unit
  * i.e. year, month, day etc) that has elapsed between date and the present
- * @param {Date} date 
+ * @param {Date} date
  */
 const getTimeSince = (date) => {
   const diffMS     = Date.now() - date;
@@ -17,9 +17,9 @@ const getTimeSince = (date) => {
   const diffYears  = Math.floor(diffDays / 365);
 
   return diffSec    < 60 ? `${diffSec} second(s)` :
-        (diffMin    < 60 ? `${diffMin} minute` : 
+        (diffMin    < 60 ? `${diffMin} minute` :
         (diffHours  < 24 ? `${diffHours} hour` :
         (diffDays   < 31 ? `${diffDays} day` :
-        (diffMonths < 12 ? `${diffMonths} month` : `${diffYears} year`)))) 
+        (diffMonths < 12 ? `${diffMonths} month` : `${diffYears} year`))))
           + "(s)";
 };

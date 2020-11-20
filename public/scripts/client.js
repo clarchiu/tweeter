@@ -7,45 +7,45 @@
 /**
  * If err is a string, just return it
  * Otherwise in the case of an ajax error, parse the error
- * to a meaningful string and return it. 
+ * to a meaningful string and return it.
  * @param {*} err error to parse
  */
 const errToString = (err) => {
-  if (typeof err === "string" ) {
+  if (typeof err === "string") {
     return err;
   }
-  let msg = "Could not complete request."
+  let msg = "Could not complete request.";
   const status = err.status;
   const statusText = err.statusText;
   if (status && statusText) { // so there can be meaningful error msg if it's an ajax error
     msg += `Status: ${status} ${statusText}`;
   }
   return msg;
-} 
+};
 
 /**
  * Initialize page with static tweets.
- * Calls loadTweets to retrieve tweets. If successful then calls renderTweets to 
+ * Calls loadTweets to retrieve tweets. If successful then calls renderTweets to
  * add tweets to html, otherwise display error message
- * @param {*} path 
+ * @param {*} path
  */
 const start = (path) => {
   loadTweets(path)
-  .then((tweets) => {
-    renderTweets(tweets);
-  })
-  .catch((err) => {
-    showErrMsg(true, errToString(err));
-  });
-}
+    .then((tweets) => {
+      renderTweets(tweets);
+    })
+    .catch((err) => {
+      showErrMsg(true, errToString(err));
+    });
+};
 
-$(document).ready(function () {
+$(document).ready(function() {
   const PATH = "/tweets";
 
   start(PATH);  // initialize page with static tweets
 
-  // --- Submit Tweet --- 
-  $("#new-tweet form").on("submit", function (event) {
+  // --- Submit Tweet ---
+  $("#new-tweet form").on("submit", function(event) {
     const $textarea = $('#new-tweet textarea');
 
     event.preventDefault();
@@ -56,8 +56,8 @@ $(document).ready(function () {
         return submitTweet(PATH, $(this));
       })
       .then(() => {
-        $textarea.val('');  // clear textarea 
-        updateCounter(0);   // rest counter to 140
+        $textarea.val('');  // clear textarea
+        updateCounter(0);   // reset counter to 140
         return loadTweets(PATH);
       })
       .then((tweets) => {
@@ -66,7 +66,7 @@ $(document).ready(function () {
       .catch((err) => {
         showErrMsg(true, errToString(err));
       });
-  });  
+  });
 });
 
 

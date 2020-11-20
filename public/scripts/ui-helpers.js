@@ -4,9 +4,9 @@
 
 /**
  * Slide down the element if show is true otherwise slide up
- * @param {Boolean} show 
- * @param {} $element 
- * @param {() => void} done 
+ * @param {Boolean} show
+ * @param {} $element
+ * @param {() => void} done
  */
 const showElement = (show, $element, done) => {
   show ? $element.slideDown(300, done) : $element.slideUp(300, done);
@@ -28,7 +28,7 @@ const showErrMsg = (show, err) => {
  * If show is not passed in, default behaviour is to toggle the compose tweet box
  * i.e. reveal if not visible and vice versa.
  * Reveals the compose tweet box if show is true otherwise hide it
- * @param {[Boolean]} show 
+ * @param {[Boolean]} show
  */
 const showComposeTweetBox = (show) => {
   const $form = $('#new-tweet form');
@@ -40,9 +40,9 @@ const showComposeTweetBox = (show) => {
 };
 
 /**
- * Reveal "jump to top" button when show is true, at the same time, 
+ * Reveal "jump to top" button when show is true, at the same time,
  * hide the "new tweet" button. Vice versa when show is false;
- * @param {Boolean} show 
+ * @param {Boolean} show
  */
 const showJumpButton = (show) => {
   const $newTweetBtn = $("#new-tweet-btn");
@@ -57,12 +57,12 @@ const showJumpButton = (show) => {
   $jumpBtn.fadeOut(100, () => {
     $newTweetBtn.fadeIn(100);
   });
-}
+};
 
 /**
  * Update textarea character counter based on inputLength
  * Counter turns red when over maximum input length
- * @param {number} inputLength 
+ * @param {number} inputLength
  */
 const updateCounter = (inputLength) => {
   const MAX_LENGTH = 140;
@@ -74,7 +74,7 @@ const updateCounter = (inputLength) => {
     return $counter.addClass('red');
   }
   $counter.removeClass('red');
-}
+};
 
 
 
