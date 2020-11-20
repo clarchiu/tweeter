@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/error-msg.css" type="text/css" />
     <link rel="stylesheet" href="/styles/tweet.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
@@ -35,7 +36,7 @@
     <!-- Top nav bar (fixed) -->
     <nav>
       <span>tweeter</span>
-      <div>Write a new tweet<i class="fas fa-angle-double-down"></i></div>
+      <div id="new-tweet-btn">Write a new tweet<i class="fas fa-angle-double-down"></i></div>
     </nav>
     <!-- Header -->
     <header class="header">
@@ -70,7 +71,7 @@
       <section id="tweets-container">
       </section>
     </main>
-    <span class="fa-stack fa-fw fa-2x">
+    <span id="jump-btn"class="fa-stack fa-fw fa-2x">
       <i class="fas fa-circle fa-stack-2x"></i>
       <i class="fas fa-angle-double-up fa-stack-1x fa-inverse"></i>
     </span>

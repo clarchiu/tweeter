@@ -1,0 +1,19 @@
+#error-msg {
+  display: none;
+  padding: 10px 20px 10px 20px;
+  margin-top: 1em;
+  border: 5px solid red;
+  color: red;
+}
+
+#error-msg div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#error-msg h3 {
+  margin: auto;
+  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+}

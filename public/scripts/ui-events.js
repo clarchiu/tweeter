@@ -1,31 +1,15 @@
 $(document).ready(function () {
-  $("nav div").on("click", function() {
-    toggleNewTweet();
+  $("#new-tweet-btn").on("click", function() {
+    showComposeTweetBox();
   });
 
-  const $jumpBtn = $('span.fa-stack');
-  const $window = $(window);
-
-  $window.on("scroll", function() {
-    const $newTweetBtn = $("nav div");
-    const scrollPos = $window.scrollTop();
-    
-    if (scrollPos > 340) {
-      $newTweetBtn.fadeOut(100, () => {
-        $jumpBtn.fadeIn(100);
-      });
-    } else {
-      $jumpBtn.fadeOut(100, () => {
-        $newTweetBtn.fadeIn(100);
-      });
-    }
+  $(window).on("scroll", function() {
+    const show = $(this).scrollTop() > 340;
+    showJumpButton(show);
   });
 
-  $jumpBtn.on("click", function() {
-    const $form = $('#new-tweet form');
-    slideElement(false, $form, () => {
-      focusTextArea($form);
-    });
-    $window.scrollTop(0);
+  $('#jump-btn').on("click", function() {
+    showComposeTweetBox(true);
+    $(window).scrollTop(0);
   })
 });

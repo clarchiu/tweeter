@@ -32,6 +32,11 @@ article.tweet footer {
   border-top: 5px solid black;
 }
 
+article.tweet footer .icons {
+  visibility: hidden;
+  font-size: 12px;
+}
+
 article.tweet footer h6 {
   margin: 0;
 }
@@ -47,5 +52,9 @@ article:hover {
 }
 
 article:hover header .handle {
+  visibility: visible;
+}
+
+article:hover footer .icons {
   visibility: visible;
 }

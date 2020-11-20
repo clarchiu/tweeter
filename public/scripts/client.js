@@ -21,7 +21,11 @@ const createTweetElement = (tweetData) => {
   const $footer = $(
     `<footer>
       <h6>${timeSince} ago</h6>
-      <div class='icons'>icons</div>
+      <div class='icons'>
+        <i class="fas fa-flag"></i>
+        <i class="fas fa-retweet"></i>
+        <i class="fas fa-heart"></i>
+      </div>
     </footer>`
   );
   const $content = $('<p>').text(tweetData.content.text);
@@ -54,12 +58,12 @@ const submitTweet = (path, formData) => {
 $(document).ready(function () {
   $("#new-tweet form").on("submit", function (event) {
     event.preventDefault();
-    toggleErrMsg(false);
+    showErrMsg(false);
 
     submitTweet('/tweets', this)
       .then(function () {
         $("#new-tweet textarea").val('').trigger('input');
-        toggleErrMsg(false);
+        showErrMsg(false);
         return loadTweets();
       })
       .then(function (tweets) {
@@ -67,7 +71,7 @@ $(document).ready(function () {
         renderTweets(tweets);
       })
       .catch(function (err) {
-        toggleErrMsg(true, err);
+        showErrMsg(true, err);
       });
   });  
 
@@ -76,7 +80,7 @@ $(document).ready(function () {
       renderTweets(tweets);
     })
     .catch(function(err) {
-      toggleErrMsg(true, err);
+      showErrMsg(true, err);
     });
 });
 
