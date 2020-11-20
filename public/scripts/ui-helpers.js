@@ -70,10 +70,10 @@ const updateCounter = (inputLength) => {
   const $counter = $("#new-tweet .counter");
   $counter.val(charsLeft);
 
-  if (charsLeft < 0) {
-    return $counter.addClass('over-word-limit');
+  if (charsLeft < 0) { // add css class if over character limit
+    return $counter.addClass('red');
   }
-  $counter.removeClass('over-word-limit');
+  $counter.removeClass('red');
 }
 
 

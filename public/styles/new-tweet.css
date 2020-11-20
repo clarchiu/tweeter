@@ -30,7 +30,7 @@
     outline: none;
 }
 
-#new-tweet label[for="tweet-text"] {
+#new-tweet label {
   font-family: 'Source Sans Pro';
   font-weight: 700;
 }
@@ -50,6 +50,6 @@
   box-shadow: 5px 5px silver;
 } 
 
-.over-word-limit {
+.red {
   color: red;
 }
