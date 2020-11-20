@@ -1,0 +1,75 @@
+#new-tweet {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#error-msg {
+  display: none;
+  padding: 10px 20px 10px 20px;
+  margin-top: 1em;
+  border: 5px solid red;
+  color: red;
+}
+
+#error-msg div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#error-msg h3 {
+  margin: auto;
+  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.material-icons {
+  font-size: 36px;
+}
+
+#new-tweet form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 0 10px;
+  margin-top: 2em;
+}
+
+#new-tweet textarea {
+  border: none;
+  border-bottom: 5px solid black;
+  margin-bottom: 20px;
+  background-color: inherit;
+  font-size: 22px;
+}
+
+#new-tweet input:focus,
+#new-tweet select:focus,
+#new-tweet button:focus,
+#new-tweet textarea:focus {
+    outline: none;
+}
+
+#new-tweet label[for="tweet-text"] {
+  font-family: 'Source Sans Pro';
+  font-weight: 700;
+}
+
+#new-tweet div {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Bungee';
+}
+
+#new-tweet button {
+  background-color: #4056A1;
+  color: #FFFFFF;
+}
+
+#new-tweet button:hover {
+  box-shadow: 5px 5px silver;
+} 
+
+.over-word-limit {
+  color: red;
+}

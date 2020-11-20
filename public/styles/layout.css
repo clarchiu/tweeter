@@ -18,8 +18,40 @@ body {
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+main {
+ width: 90%;
+ margin: auto;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ background-color: inherit;
+}
+
+@media only screen and (min-width: 1024px) {
+  body {
+    padding-top: 120px;
+  }
+  
+  nav {
+    background-color: #4056A1;
+  }
+
+  .header {
+   float: left;
+   margin: 4em 2em 2em 2em;
+   width: 30%;
+   position: fixed;
+ }
+
+ main {
+   float: right;
+   padding: 2em;
+   width: 60%;
+ }
+}
