@@ -35,14 +35,22 @@ const createTweetElement = (tweetData) => {
 }
 
 const renderTweets = (tweets) => {
+  const $tweetContainer = $('#tweets-container')
+  $tweetContainer.empty();
   for (const tweet of tweets) {
     const $tweet = createTweetElement(tweet);
-    $('#tweets-container').append($tweet); 
+    $tweetContainer.append($tweet); 
   }
 }
 
 const loadTweets = () => {
-  return $.ajax('/tweets', { method: 'GET' });
+  $.ajax('/tweets', { method: 'GET' })
+    .then(function(tweets) {
+      renderTweets(tweets);
+    })
+    .catch(function() {
+      showErrMsg(true, "Could not load tweets");
+    });
 }
 
 const submitTweet = (path, formData) => {
@@ -56,6 +64,10 @@ const submitTweet = (path, formData) => {
 }
 
 $(document).ready(function () {
+  // load and render tweets from initial-tweets.json
+  loadTweets();
+
+  // attach submit event
   $("#new-tweet form").on("submit", function (event) {
     event.preventDefault();
     showErrMsg(false);
@@ -64,24 +76,12 @@ $(document).ready(function () {
       .then(function () {
         $("#new-tweet textarea").val('').trigger('input');
         showErrMsg(false);
-        return loadTweets();
-      })
-      .then(function (tweets) {
-        $('#tweets-container').empty();
-        renderTweets(tweets);
+        loadTweets();
       })
       .catch(function (err) {
-        showErrMsg(true, err);
+        showErrMsg(true, "Could not submit tweet: " + err);
       });
   });  
-
-  loadTweets()
-    .then(function(tweets) {
-      renderTweets(tweets);
-    })
-    .catch(function(err) {
-      showErrMsg(true, err);
-    });
 });
 
 
