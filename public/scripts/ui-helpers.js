@@ -43,5 +43,16 @@ const showJumpButton = (show) => {
   }
 }
 
+const updateCounter = (inputLength) => {
+  const MAX_LENGTH = 140;
+  const charsLeft = MAX_LENGTH - inputLength;
+  const $counter = $("#new-tweet .counter");
+  $counter.val(charsLeft);
+  charsLeft < 0 ? 
+    $counter.addClass('over-word-limit') :
+    $counter.removeClass('over-word-limit');
+}
+
+
 
 
