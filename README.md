@@ -14,5 +14,11 @@ Tweeter is a simple, single-page Twitter clone. This application leverages Expre
 - Express
 - Node 5.10.x or above
 
+## Screenshots
+
+!["Screen shot of page in wide screen"](https://github.com/clarchiu/tweeter/blob/master/docs/wide-screen.png?raw=true)
+!["Screen shot of page in narrow screen"](https://github.com/clarchiu/tweeter/blob/master/docs/narrow-screen.png?raw=true)
+!["Screen shot of error dialog box"](https://github.com/clarchiu/tweeter/blob/master/docs/error-msg.png?raw=true)
+
 ### Comments
 
